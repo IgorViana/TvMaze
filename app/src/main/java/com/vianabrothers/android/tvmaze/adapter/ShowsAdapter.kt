@@ -2,22 +2,25 @@ package com.vianabrothers.android.tvmaze.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vianabrothers.android.tvmaze.databinding.ItemShowBinding
 import com.vianabrothers.android.tvmaze.model.Show
 import com.vianabrothers.android.tvmaze.utils.downloadImage
 
-class ShowsAdapter :
-    ListAdapter<Show, ShowsAdapter.ShowsViewHolder>(ShowsDiffCallback()) {
+class ShowsAdapter(private val showClickListener: ShowClickListener) :
+    PagingDataAdapter<Show, ShowsAdapter.ShowsViewHolder>(ShowsDiffCallback()) {
 
     class ShowsViewHolder(private val binding: ItemShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(show: Show) {
+        fun bind(show: Show, showClickListener: ShowClickListener) {
             binding.idShowTitle.text = show.name
             binding.idShowCover.downloadImage(show)
+            binding.root.setOnClickListener {
+                showClickListener.onShowClick(show)
+            }
         }
     }
 
@@ -29,7 +32,9 @@ class ShowsAdapter :
 
     override fun onBindViewHolder(holder: ShowsViewHolder, position: Int) {
         val show = getItem(position)
-        holder.bind(show)
+        show?.let {
+            holder.bind(it, showClickListener)
+        }
     }
 
 }
@@ -48,5 +53,11 @@ private class ShowsDiffCallback : DiffUtil.ItemCallback<Show>() {
         newItem: Show
     ): Boolean {
         return oldItem == newItem
+    }
+}
+
+class ShowClickListener(val click: (show: Show) -> Unit) {
+    fun onShowClick(show: Show) {
+        click(show)
     }
 }
