@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#fafafa</color>
-    <color name="primaryLightColor">#ffffff</color>
-    <color name="primaryDarkColor">#c7c7c7</color>
+    <color name="primaryColor">#ff3d00</color>
+    <color name="primaryLightColor">#ff7539</color>
+    <color name="primaryDarkColor">#c30000</color>
     <color name="secondaryColor">#ffee58</color>
     <color name="secondaryLightColor">#ffff8b</color>
     <color name="secondaryDarkColor">#c9bc1f</color>
@@ -13,10 +13,10 @@
     <color name="colorOnBackground">#ffffff</color>
     <color name="colorSurface">#ffee58</color>
     <color name="colorOnSurface">#ffee58</color>-->
-    <color name="colorBackground">#ff0000</color>
+    <!--<color name="colorBackground">#ff0000</color>
     <color name="colorOnBackground">#ff0000</color>
     <color name="colorSurface">#ff0000</color>
     <color name="colorOnSurface">#ff0000</color>
     <color name="colorError">#ff0000</color>
-    <color name="colorOnError">#ff0000</color>
+    <color name="colorOnError">#ff0000</color>-->
 </resources>
