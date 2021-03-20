@@ -1,14 +1,11 @@
 package com.vianabrothers.android.tvmaze.ui.mainFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.vianabrothers.android.tvmaze.databinding.MainFragmentBinding
-import com.vianabrothers.android.tvmaze.model.Show
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -22,18 +19,19 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
-        Log.i("TESTE", "INICIOU")
-        mainFragmentViewModel.getListShows(0)
-        mainFragmentViewModel.shows.observe(viewLifecycleOwner, Observer {
-            printList(it)
-        })
+        setUp()
         return binding.root
     }
 
-    private fun printList(lista: List<Show>) {
-        for (item in lista) {
-            Log.i("TESTE", item.toString())
-        }
+    private fun setUp() {
+        mainFragmentViewModel.getListShows(0)
+        observeLiveData()
+    }
+
+    private fun observeLiveData() {
+        mainFragmentViewModel.shows.observe(viewLifecycleOwner, {
+
+        })
     }
 
 }
