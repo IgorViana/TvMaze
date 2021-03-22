@@ -2,17 +2,18 @@ package com.vianabrothers.android.tvmaze.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vianabrothers.android.tvmaze.databinding.ItemShowBinding
 import com.vianabrothers.android.tvmaze.model.Show
 import com.vianabrothers.android.tvmaze.utils.downloadImage
 
-class ShowsAdapter(private val showClickListener: ShowClickListener) :
-    PagingDataAdapter<Show, ShowsAdapter.ShowsViewHolder>(ShowsDiffCallback()) {
 
-    class ShowsViewHolder(private val binding: ItemShowBinding) :
+class SearchAdapter(private val showClickListener: ShowClickListener) :
+    ListAdapter<Show, SearchAdapter.SearchViewHolder>(SearchDiffCallback()) {
+
+    class SearchViewHolder(private val binding: ItemShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show, showClickListener: ShowClickListener) {
@@ -24,13 +25,13 @@ class ShowsAdapter(private val showClickListener: ShowClickListener) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemShow = ItemShowBinding.inflate(layoutInflater, parent, false)
-        return ShowsViewHolder(itemShow)
+        return SearchViewHolder(itemShow)
     }
 
-    override fun onBindViewHolder(holder: ShowsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val show = getItem(position)
         show?.let {
             holder.bind(it, showClickListener)
@@ -38,7 +39,7 @@ class ShowsAdapter(private val showClickListener: ShowClickListener) :
     }
 }
 
-private class ShowsDiffCallback : DiffUtil.ItemCallback<Show>() {
+private class SearchDiffCallback : DiffUtil.ItemCallback<Show>() {
 
     override fun areItemsTheSame(
         oldItem: Show,
@@ -52,11 +53,5 @@ private class ShowsDiffCallback : DiffUtil.ItemCallback<Show>() {
         newItem: Show
     ): Boolean {
         return oldItem == newItem
-    }
-}
-
-class ShowClickListener(val click: (show: Show) -> Unit) {
-    fun onShowClick(show: Show) {
-        click(show)
     }
 }

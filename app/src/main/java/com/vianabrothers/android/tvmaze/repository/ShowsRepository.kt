@@ -5,8 +5,14 @@ import com.vianabrothers.android.tvmaze.network.services.TvMazeService
 
 class ShowsRepository(
     private val tvMazeService: TvMazeService
-) {
-    suspend fun getListShows(page: Int): List<Show> {
+): ShowsRepositoryInterface {
+
+    override suspend fun getListShows(page: Int): List<Show> {
         return tvMazeService.getListShows(page)
     }
+
+    override suspend fun searchShows(param: String): List<Show> {
+        return tvMazeService.searchShows(param)
+    }
+
 }

@@ -16,24 +16,22 @@ class MainFragmentViewModel(
     private val showsRepository: ShowsRepository,
 ) : ViewModel() {
 
-    private val _shows = MutableLiveData<List<Show>>()
-    val shows: LiveData<List<Show>>
-        get() = _shows
+    private val _searchShows = MutableLiveData<List<Show>>()
+    val searchShows: LiveData<List<Show>>
+        get() = _searchShows
 
 
-    fun getListShows(page: Int) {
+    fun searchShows(params: String) {
         viewModelScope.launch {
             try {
-                val result = showsRepository.getListShows(page)
-                _shows.postValue(result)
+                val result = showsRepository.searchShows(params)
+                _searchShows.postValue(result)
             } catch (ex: Exception) {
             }
         }
     }
 
     val flow = Pager(
-        // Configure how data is loaded by passing additional properties to
-        // PagingConfig, such as prefetchDistance.
         PagingConfig(pageSize = 250)
     ) {
         ShowsPagingSource(showsRepository)
