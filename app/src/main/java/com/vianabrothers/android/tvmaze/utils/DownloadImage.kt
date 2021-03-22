@@ -2,10 +2,12 @@ package com.vianabrothers.android.tvmaze.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.vianabrothers.android.tvmaze.model.Show
+import com.vianabrothers.android.tvmaze.R
 
-fun ImageView.downloadImage(show: Show) {
+private const val loading = "https://miro.medium.com/max/875/0*H3jZONKqRuAAeHnG.jpg"
+fun ImageView.downloadImage(url: String?) {
     Glide.with(this.context)
-        .load(show.image.original)
+        .load(url ?: loading)
+        .placeholder(R.drawable.ic_launcher_background)
         .into(this)
 }

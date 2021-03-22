@@ -6,19 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vianabrothers.android.tvmaze.databinding.ItemShowBinding
+import com.vianabrothers.android.tvmaze.model.SearchShow
 import com.vianabrothers.android.tvmaze.model.Show
 import com.vianabrothers.android.tvmaze.utils.downloadImage
 
 
 class SearchAdapter(private val showClickListener: ShowClickListener) :
-    ListAdapter<Show, SearchAdapter.SearchViewHolder>(SearchDiffCallback()) {
+    ListAdapter<SearchShow, SearchAdapter.SearchViewHolder>(SearchDiffCallback()) {
 
     class SearchViewHolder(private val binding: ItemShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(show: Show, showClickListener: ShowClickListener) {
             binding.idShowTitle.text = show.name
-            binding.idShowCover.downloadImage(show)
+            binding.idShowCover.downloadImage(show.image?.original)
             binding.root.setOnClickListener {
                 showClickListener.onShowClick(show)
             }
@@ -34,23 +35,23 @@ class SearchAdapter(private val showClickListener: ShowClickListener) :
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val show = getItem(position)
         show?.let {
-            holder.bind(it, showClickListener)
+            holder.bind(it.show, showClickListener)
         }
     }
 }
 
-private class SearchDiffCallback : DiffUtil.ItemCallback<Show>() {
+private class SearchDiffCallback : DiffUtil.ItemCallback<SearchShow>() {
 
     override fun areItemsTheSame(
-        oldItem: Show,
-        newItem: Show
+        oldItem: SearchShow,
+        newItem: SearchShow
     ): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.show.id == newItem.show.id
     }
 
     override fun areContentsTheSame(
-        oldItem: Show,
-        newItem: Show
+        oldItem: SearchShow,
+        newItem: SearchShow
     ): Boolean {
         return oldItem == newItem
     }

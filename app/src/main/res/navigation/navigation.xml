@@ -25,14 +25,31 @@
         <action
             android:id="@+id/action_searchFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.vianabrothers.android.tvmaze.ui.detailsFragment.DetailsFragment"
+        android:name="com.vianabrothers.android.tvmaze.ui.showDetailsFragment.ShowDetailsFragment"
         android:label="details_fragment"
-        tools:layout="@layout/details_fragment" >
+        tools:layout="@layout/show_details_fragment" >
         <argument
             android:name="show"
             app:argType="com.vianabrothers.android.tvmaze.model.Show" />
+        <action
+            android:id="@+id/action_detailsFragment_to_episodeDetailFragment"
+            app:destination="@id/episodeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodeDetailFragment"
+        android:name="com.vianabrothers.android.tvmaze.ui.episodeDetailsFragment.EpisodeDetailFragment"
+        android:label="EpisodeDetailFragment" >
+        <argument
+            android:name="episode"
+            app:argType="com.vianabrothers.android.tvmaze.model.Episode" />
+        <action
+            android:id="@+id/action_episodeDetailFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

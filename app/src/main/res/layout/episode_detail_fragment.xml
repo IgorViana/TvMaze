@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.episodeDetailsFragment.EpisodeDetailFragment">
+
+        <ImageView
+            android:id="@+id/idEpsodeDetailImage"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEpsodeDetailImage" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Numero:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEpsodeDetailNameText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailSeasonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temporada:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEpsodeDetailNumberText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailSummaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resumo:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEpsodeDetailSeasonText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/idEpsodeDetailNameText"
+            app:layout_constraintTop_toTopOf="@+id/idEpsodeDetailNameText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/idEpsodeDetailNumberText"
+            app:layout_constraintTop_toTopOf="@+id/idEpsodeDetailNumberText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailSeason"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/idEpsodeDetailSeasonText"
+            app:layout_constraintTop_toTopOf="@+id/idEpsodeDetailSeasonText" />
+
+        <TextView
+            android:id="@+id/idEpsodeDetailSummary"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEpsodeDetailSummaryText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

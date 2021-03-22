@@ -17,7 +17,7 @@ class ShowsAdapter(private val showClickListener: ShowClickListener) :
 
         fun bind(show: Show, showClickListener: ShowClickListener) {
             binding.idShowTitle.text = show.name
-            binding.idShowCover.downloadImage(show)
+            binding.idShowCover.downloadImage(show.image?.original)
             binding.root.setOnClickListener {
                 showClickListener.onShowClick(show)
             }
