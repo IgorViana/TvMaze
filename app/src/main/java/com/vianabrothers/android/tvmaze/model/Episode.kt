@@ -9,6 +9,6 @@ data class Episode(
     val name: String,
     val number: Long,
     val season: Long,
-    val summary: String,
-    val image: Image
+    val summary: String?,
+    val image: Image?
 ) : Parcelable

@@ -1,5 +1,6 @@
 package com.vianabrothers.android.tvmaze.ui.searchFragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,11 +45,27 @@ class SearchFragment : Fragment() {
             val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(it)
             navController.navigate(action)
         })
-        binding.idSearchShowsList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = searchAdapter
-        }
+        configureListGridToScreenSize()
+
         observeSearch()
+    }
+
+    private fun configureListGridToScreenSize() {
+        if (resources.configuration.screenLayout and
+            Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+            resources.configuration.screenLayout and
+            Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_XLARGE
+        ) {
+            binding.idSearchShowsList.apply {
+                layoutManager = GridLayoutManager(requireContext(), 5)
+                adapter = searchAdapter
+            }
+        } else {
+            binding.idSearchShowsList.apply {
+                layoutManager = GridLayoutManager(requireContext(), 3)
+                adapter = searchAdapter
+            }
+        }
     }
 
     private fun observeSearch() {
@@ -58,9 +75,6 @@ class SearchFragment : Fragment() {
             }
             true
         }
-        /*binding.idSearchTextInput.doOnTextChanged { text, _, _, _ ->
-            searchViewModel.searchShows(text.toString())
-        }*/
         searchViewModel.searchShows.observe(viewLifecycleOwner, {
             searchAdapter.submitList(it)
         })

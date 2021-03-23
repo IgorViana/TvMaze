@@ -1,5 +1,6 @@
 package com.vianabrothers.android.tvmaze.ui.mainFragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,6 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
 
     private val mainFragmentViewModel: MainFragmentViewModel by viewModel()
-
     private val navController: NavController by lazy {
         findNavController()
     }
@@ -54,13 +54,31 @@ class MainFragment : Fragment() {
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it)
             navController.navigate(action)
         })
-        binding.idShowsList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = showsAdapter
-        }
+
+        configureListGridToScreenSize()
+
         lifecycleScope.launch {
             mainFragmentViewModel.flow.collectLatest { pagingData ->
                 showsAdapter.submitData(pagingData)
+            }
+        }
+    }
+
+    private fun configureListGridToScreenSize() {
+        if (resources.configuration.screenLayout and
+            Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE ||
+            resources.configuration.screenLayout and
+            Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_XLARGE
+        ) {
+
+            binding.idShowsList.apply {
+                layoutManager = GridLayoutManager(requireContext(), 5)
+                adapter = showsAdapter
+            }
+        } else {
+            binding.idShowsList.apply {
+                layoutManager = GridLayoutManager(requireContext(), 3)
+                adapter = showsAdapter
             }
         }
     }

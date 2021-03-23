@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.vianabrothers.android.tvmaze.R
 import com.vianabrothers.android.tvmaze.databinding.EpisodeDetailFragmentBinding
 import com.vianabrothers.android.tvmaze.model.Episode
 import com.vianabrothers.android.tvmaze.utils.HtmlParse
 import com.vianabrothers.android.tvmaze.utils.downloadImage
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class EpisodeDetailFragment : Fragment() {
 
     private lateinit var binding: EpisodeDetailFragmentBinding
     private lateinit var episode: Episode
 
-    private val viewModel: EpisodeDetailViewModel by viewModel()
     private val args: EpisodeDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -35,11 +34,12 @@ class EpisodeDetailFragment : Fragment() {
     }
 
     private fun populateEpisode() {
-        binding.idEpsodeDetailImage.downloadImage(episode.image.original)
+        binding.idEpsodeDetailImage.downloadImage(episode.image?.original)
         binding.idEpsodeDetailName.text = episode.name
         binding.idEpsodeDetailNumber.text = episode.number.toString()
         binding.idEpsodeDetailSeason.text = episode.season.toString()
-        binding.idEpsodeDetailSummary.text = HtmlParse().parseHtml(episode.summary)
+        binding.idEpsodeDetailSummary.text =
+            HtmlParse().parseHtml(episode.summary ?: getString(R.string.no_summary))
     }
 
 }
