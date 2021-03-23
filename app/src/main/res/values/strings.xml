@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">TvMaze</string>
     <string name="no_summary">No summary for this episode</string>
+    <string name="name">Name:</string>
+    <string name="number">Number:</string>
+    <string name="season">Season:</string>
+    <string name="summary">Summary:</string>
+    <string name="time">Time:</string>
+    <string name="days">Days:</string>
+    <string name="space">-</string>
 </resources>
