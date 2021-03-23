@@ -69,11 +69,6 @@ class ShowDetailsFragment : Fragment() {
     }
 
     private fun setUpEpisodesList() {
-        /*episodeAdapter = EpisodeAdapter(EpisodeClickListener {
-            val action =
-                ShowDetailsFragmentDirections.actionDetailsFragmentToEpisodeDetailFragment(it)
-            navController.navigate(action)
-        })*/
         seasonAdapter = SeasonAdapter(EpisodeClickListener {
             val action =
                 ShowDetailsFragmentDirections.actionDetailsFragmentToEpisodeDetailFragment(it)
@@ -88,7 +83,6 @@ class ShowDetailsFragment : Fragment() {
         viewModel.showEpisodes.observe(viewLifecycleOwner, { list ->
             val temp = list.distinctBy { it.season }
             seasonAdapter.submitMyList(temp, list)
-            //seasonAdapter.submitList(temp)
         })
     }
 
@@ -96,7 +90,7 @@ class ShowDetailsFragment : Fragment() {
         val builder = StringBuilder()
         show.schedule.days.forEach {
             builder.append(it)
-            builder.append(" , ")
+            builder.append(" | ")
         }
         return builder.toString()
     }
